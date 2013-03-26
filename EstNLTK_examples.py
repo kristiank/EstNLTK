@@ -2,6 +2,8 @@
 from EstNLTK.EstNLTK import EstNLTK
 enltk = EstNLTK()
 
+#Siia ma kirjutan suvalise kommentaari.
+
 ### lausesta() lausestab, rohkem ei midagi
 print enltk.lausesta('See on üks lause. See on juba teine lause.')
 
@@ -31,3 +33,5 @@ print enltk.bigrammid('anna mulle selle lause bigrammid, siin on koma')
 
 ### bigrammid_kitsendustega() leiab sisendstringist kõik bigrammid, kus esimeses sõnas on argument 2 ja teises sõnas argument 3
 print enltk.bigrammid_kitsendustega('anna mulle selle lause bigrammid, kusjuures siin on veel kitsendused','_P_','_S_')
+
+#blablablaa
