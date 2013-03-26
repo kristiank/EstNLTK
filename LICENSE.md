@@ -1,0 +1,1 @@
+peaks kasutama GPLv3
