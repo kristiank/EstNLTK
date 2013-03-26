@@ -1,0 +1,33 @@
+-------------------------------------------------------
+EstNLTK - Eesti keele automaattöötlusvahendid Pythonile
+Versioon 0.1. (04.11.2011)
+-------------------------------------------------------
+Versioon 0.1. sisaldab:
+
+Wordneti interface:
+	Sünonüümide leidmiseks
+	Hüperonüümide leidmiseks
+	Definitsioonide leidmiseks
+
+t3mesta interface:
+	Ühestamiseks
+	lemmatiseerimiseks
+
+Lausestaja
+
+Bigrammide leidja
+-------------------------------------------------------
+Funktsioonide nimistu:
+
+wn_synonyymid()
+wn hyperonyymid()
+wn_definitsioonid()
+
+t3_lemmatiseeri()
+t3_yhesta()
+
+lausesta()
+
+bigrammid()
+bigrammid_kitsendustega()
+-------------------------------------------------------
