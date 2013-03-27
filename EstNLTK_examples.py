@@ -35,3 +35,4 @@ print enltk.bigrammid('anna mulle selle lause bigrammid, siin on koma')
 print enltk.bigrammid_kitsendustega('anna mulle selle lause bigrammid, kusjuures siin on veel kitsendused','_P_','_S_')
 
 #blablablaa
+#Liiga ilus kood
