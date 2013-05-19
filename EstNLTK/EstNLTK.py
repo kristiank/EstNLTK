@@ -4,15 +4,18 @@ import re
 import os
 
 class EstNLTK:
-
+    """Python API erinevatele (eesti) keeletehnoloogilistele vidinatele"""
+    
     def __init__(self):
         self.t3mesta    = '/opt/home/rsirel/public_html/mag/ressursid/mrf/prog-lin32/t3mesta -Y -path $HOME/bin:/opt/home/rsirel/public_html/mag/ressursid/mrf/noarch/data +1 -cio utf8'
         self.lausestaja = '/opt/home/rsirel/public_html/mag/ressursid/lausestaja/lausestaja.pl'
         self.wordnet    = '/opt/home/rsirel/public_html/mag/ressursid/wordnet/wnonto.owl'
 
     def unikaliseeriList(self, s):
-        ### Funktsioon kaotab listist kordused. ############
-        ### Funktsiooni sisendiks ja väljundiks on list. ###
+        """
+        Funktsioon kaotab listist kordused.
+        Funktsiooni sisendiks ja väljundiks on list.
+        """
         output = []
         for x in s:
           if x not in output:
@@ -20,9 +23,11 @@ class EstNLTK:
         return output
 
     def lausesta(self, sisend):
-        ### Funktsioon lausestab sisestatud stringi. ####
-        ### Funktsiooni sisendiks on string. ############
-        ### Funktsiooni väljundiks on list lausetega. ###
+        """
+        lausestab sisestatud stringi.
+        Funktsiooni sisendiks on string.
+        Funktsiooni väljundiks on list lausetega.
+        """
         lausestatud = sp.Popen('echo "'+sisend+'" | '+self.lausestaja, stdout=sp.PIPE, shell=True).communicate()[0]
         lausestatud = lausestatud.replace('<s> ','')
         lausestatudlist = lausestatud.split(' </s> ')
@@ -33,9 +38,11 @@ class EstNLTK:
     ###################
 
     def t3_lemmatiseeri(self, sisend, otype):
-        ### Funktsioon lemmatiseerib kõik lauses leiduvad sõnavormid. ##########
-        ### Funktsiooni sisendiks on string, mida soovitakse lemmatiseerida. ###
-        ### Funktsiooni väljundiks on lemmatiseeritud string. ##################
+        """
+        Funktsioon lemmatiseerib kõik lauses leiduvad sõnavormid.
+        Funktsiooni sisendiks on string, mida soovitakse lemmatiseerida.
+        Funktsiooni väljundiks on lemmatiseeritud string.
+        """
         mrf = sp.Popen('echo "'+sisend+'" | '+self.t3mesta, stdout=sp.PIPE, shell=True).communicate()[0]
         lemmad = []
         for a in mrf.split('\n'):
@@ -79,9 +86,11 @@ class EstNLTK:
     ###############
         
     def wn_synonyymid(self, otsitav):
-        ### Funktsioon leiab WordNetist sõnale sünonüümid. ###
-        ### Funktsiooni sisendiks on string. #################
-        ### Funktsiooni väljundiks on list sünonüümidega. ####
+        """
+        Funktsioon leiab WordNetist sõnale sünonüümid.
+        Funktsiooni sisendiks on string.
+        Funktsiooni väljundiks on list sünonüümidega.
+        """
         fh=open(self.wordnet,"r")
         fail = fh.read()
         fh.close
@@ -103,9 +112,11 @@ class EstNLTK:
         return synonyymid
 
     def wn_hyperonyymid(self, otsitav):
-        ### Funktsioon leiab WordNetist sõnale hüponüümid. ###
-        ### Funktsiooni sisendiks on string. #################
-        ### Funktsiooni väljundiks on list hüponüümidega. ####
+        """
+        Funktsioon leiab WordNetist sõnale hüponüümid.
+        Funktsiooni sisendiks on string.
+        Funktsiooni väljundiks on list hüponüümidega.
+        """
         fh=open(self.wordnet,"r")
         fail = fh.read()
         fh.close
@@ -134,9 +145,11 @@ class EstNLTK:
         return hyponyymid
 
     def wn_definitsioonid(self, otsitav):
-        ### Funktsioon leiab Wordnetist sõnale definitsioonid. ###
-        ### Funktsiooni sisendiks on string. #####################
-        ### Funktsiooni väljundiks on list definitsioonidega. ####
+        """
+        Funktsioon leiab Wordnetist sõnale definitsioonid.
+        Funktsiooni sisendiks on string.
+        Funktsiooni väljundiks on list definitsioonidega.
+        """
         fh=open(self.wordnet,"r")
         fail = fh.read()
         fh.close
@@ -160,9 +173,11 @@ class EstNLTK:
     #################
 
     def bigrammid(self,sisend,margid=[',','.',':',';','*']):
-        ### Funktsioon leiab sisendstringist bigrammid. #############
-        ### Ei arvesta bigramme, kus esimese sõne küljes on märk. ###
-        ### Väljund on listina. #####################################
+        """
+        Funktsioon leiab sisendstringist bigrammid.
+        Ei arvesta bigramme, kus esimese sõne küljes on märk.
+        Väljund on listina.
+        """
         margid = margid
         sisend = sisend.lower().split(' ')
         output = []
@@ -186,10 +201,13 @@ class EstNLTK:
                 output.append(" ".join(bigram))
         return output
 
-    def bigrammid_kitsendustega(self,sisend,kitsendus_1,kitsendus_2,margid=[',','.',':',';','*']):
-        ### Funktsioon leiab sisendstringist bigrammid (kitsendustega). #############
-        ### Ei arvesta bigramme, kus esimese sõne küljes on märk. ###################
-        ### Väljund on listina. #####################################################
+    def bigrammid_kitsendustega(self,sisend,kitsendus_1,
+                        kitsendus_2,margid=[',','.',':',';','*']):
+        """
+        Funktsioon leiab sisendstringist bigrammid (kitsendustega).
+        Ei arvesta bigramme, kus esimese sõne küljes on märk.
+        Väljund on listina.
+        """
         margid = margid
         sisend = self.t3_yhesta(sisend,'2dlist')
         output = []
