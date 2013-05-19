@@ -159,11 +159,11 @@ class EstNLTK:
     ### BIGRAMMID ###
     #################
 
-    def bigrammid(self,sisend):
+    def bigrammid(self,sisend,margid=[',','.',':',';','*']):
         ### Funktsioon leiab sisendstringist bigrammid. #############
         ### Ei arvesta bigramme, kus esimese sõne küljes on märk. ###
         ### Väljund on listina. #####################################
-        margid = [',','.',':',';','*']
+        margid = margid
         sisend = sisend.lower().split(' ')
         output = []
         cnt=0
@@ -186,11 +186,11 @@ class EstNLTK:
                 output.append(" ".join(bigram))
         return output
 
-    def bigrammid_kitsendustega(self,sisend,kitsendus_1,kitsendus_2):
+    def bigrammid_kitsendustega(self,sisend,kitsendus_1,kitsendus_2,margid=[',','.',':',';','*']):
         ### Funktsioon leiab sisendstringist bigrammid (kitsendustega). #############
         ### Ei arvesta bigramme, kus esimese sõne küljes on märk. ###################
         ### Väljund on listina. #####################################################
-        margid = [',','.',':',';','*']
+        margid = margid
         sisend = self.t3_yhesta(sisend,'2dlist')
         output = []
         cnt=0
